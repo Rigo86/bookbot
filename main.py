@@ -1,7 +1,20 @@
 
 def main():
    create_report("./books/frankenstein.txt")
+
+
+def create_report(book_path):
     
+    print(f"--- Analyzing document contents of {book_path} ---")
+    file_contents = read_book(book_path)
+    
+    num_words = get_num_words(file_contents)
+    print(f"The document contains {num_words} words!")
+    letter_count = get_letter_count(file_contents)
+    sorted_list = chars_dict_to_sorted_list(letter_count)
+    print_letter_count(sorted_list)
+
+    print("--- Document Analysis complete ---")
 
 def read_book(book_path):
     with open(book_path) as f:
@@ -23,22 +36,11 @@ def get_letter_count(text):
                 letter_count[letter] = 1
     return letter_count
 
-def create_report(book_path):
-    
-    print(f"--- Analyzing document contents of {book_path} ---")
-    file_contents = read_book(book_path)
-    
-    num_words = get_num_words(file_contents)
-    print(f"The document contains {num_words} words!")
-    letter_count = get_letter_count(file_contents)
-    sorted_list = chars_dict_to_sorted_list(letter_count)
-    print_letter_count(sorted_list)
-
-    print("--- Document Analysis complete ---")
-
 def print_letter_count(letters):
     for letter in letters:
         print(f"The character {letter["char"]} is found {letter["num"]} times in the document")
+
+
 
 def sort_on(d):
     return d["num"]
